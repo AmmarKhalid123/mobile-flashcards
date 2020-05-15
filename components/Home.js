@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ScrollView, View } from 'react-native';
-import { getDecks } from '../utils/_decks';
-import { Header } from 'react-native-elements';
-import DeckCard from './DeckCard';
-import { setDecks } from '../redux/ActionCreators';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Main from './Main'
+import { NavigationContainer } from '@react-navigation/native'
+import Quiz from './Quiz';
+import DeckDetail from './DeckDetail';
+import AddCard from './AddCard';
+
+const Stack = createStackNavigator()
 
 export default function Home () {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        getDecks().then(results => dispatch(setDecks(JSON.parse(results))))
-    })
-
-    const decks = useSelector((state) => state)
-
-    if (decks !== null) {
-        const decksNames = Object.keys(decks); 
-
-        return(
-            <ScrollView style={{flex: 1}}>
+    return (
+            <NavigationContainer>
+                <Stack.Navigator>
                 
-                <Header
-                centerComponent={{ text: 'UdaciCards', style: { color: '#fff', fontSize: 30 } }}
-                />
-                {decksNames.map((deckName) => (
-                <DeckCard key= {deckName} title={decks[deckName].title} cards={decks[deckName].questions.length}/>
-                ))}
-            </ScrollView>            
-        )
-    }
-    else {
-        return (
-            <View style={{flex: 1}}>
-                <Header
-                centerComponent={{ text: 'UdaciCards', style: { color: '#fff', fontSize: 30 } }}
-                />
-                <DeckCard title={'No Decks Available!'} />
-            </View>
-        )
-    }
-    
+                <Stack.Screen name='Main' component={Main}
+                options={{headerShown: false}} />
+                
+                <Stack.Screen name='DeckScreen' component={DeckDetail}
+                options={{
+                    title: 'Deck Details',
+                    headerStyle: {backgroundColor: '#212121'},
+                    headerTintColor: '#fff'
+                }} />
+
+                <Stack.Screen name='AddCardScreen' component={AddCard}
+                options={{
+                    title: 'Add a Card',
+                    headerStyle: {backgroundColor: '#212121'},
+                    headerTintColor: '#fff'
+                }} />
+
+                <Stack.Screen name='QuizScreen' component={Quiz}
+                options={{
+                    title: 'Quiz',
+                    headerStyle: {backgroundColor: '#212121'},
+                    headerTintColor: '#fff'
+                }} />
+                </Stack.Navigator>
+            </NavigationContainer>
+    )
 }

@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-navigation/stack
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-navigation-gesture-handler
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\SDL2_mixer-2.0.4;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Users\Ammar\AppData\Local\Programs\Python\Python38-32\;C:\Users\Ammar\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\Ammar\AppData\Local\Microsoft\WindowsApps;C:\Users\Ammar\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ammar\AppData\Local\GitHubDesktop\bin;C:\Users\Ammar\AppData\Local\Yarn\bin;C:\Modeltech_pe_edu_10.4a\win32pe_edu;C:\modeltech_6.5c\win32;C:\Users\Ammar\AppData\Roaming\npm;C:\Users\Ammar\AppData\Local\Android\Sdk\platforms;C:\Users\Ammar\AppData\Local\Android\Sdk\platform-tools;
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'D:\BasicDev\ReactNanodegreeProgramUdacity\mobile-flashcards\node_modules\@babel\compat-data\node_modules\.bin'
+  Error: https://registry.yarnpkg.com/react-navigation-gesture-handler: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66096:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140748:22)
+      at Request.emit (events.js:310:20)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141720:10)
+      at Request.emit (events.js:310:20)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141642:12)
+      at Object.onceWrapper (events.js:416:28)
+      at IncomingMessage.emit (events.js:322:22)
+      at endReadableNT (_stream_readable.js:1187:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
 
 npm manifest: 
   {
@@ -28,8 +38,10 @@ npm manifest:
     },
     "dependencies": {
       "@fortawesome/free-solid-svg-icons": "^5.13.0",
+      "@react-native-community/masked-view": "0.1.6",
       "@react-navigation/bottom-tabs": "^5.4.2",
       "@react-navigation/native": "^5.3.0",
+      "@react-navigation/stack": "^5.3.3",
       "expo": "~37.0.3",
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
@@ -1195,6 +1207,11 @@ Lockfile:
       wcwidth "^1.0.1"
       ws "^1.1.0"
   
+  "@react-native-community/masked-view@0.1.6":
+    version "0.1.6"
+    resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.6.tgz#c7f2ac187c1f25aa8c30d11baa8f4398eca3bb84"
+    integrity sha512-PpMoeXwPUoldCRKDuSi+zK5rT+sJTW6ri6RdGPkSKRzU77Q1d9IaR0O5IKvBj0XSdL3p+dcOa05gk35aGDffBQ==
+  
   "@react-navigation/bottom-tabs@^5.4.2":
     version "5.4.2"
     resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.4.2.tgz#db1090fe2fdb27c77ffa983a618accd158a12080"
@@ -1228,6 +1245,14 @@ Lockfile:
     integrity sha512-Q8ZIubVYc1569JOs2oMWbhNXBNzZHvRfP5cEZ6/ksj9cPF7DkwOXsAdF0b+Oe0ei0f7OaK9LTRmfiNdtAPWVzw==
     dependencies:
       nanoid "^3.1.5"
+  
+  "@react-navigation/stack@^5.3.3":
+    version "5.3.3"
+    resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.3.3.tgz#8189160ad4be6a9ddc8a01af100ad5b737e0c2e1"
+    integrity sha512-UZqplwGnu1X3sSWTIERUG1NMK2cr6ER7ibYVMKNMY5a06t/hq4o2vgAG2ZNXKcNpgl0K2DR08EFhgeJLcP0mgg==
+    dependencies:
+      color "^3.1.2"
+      react-native-iphone-x-helper "^1.2.1"
   
   "@types/color-name@^1.1.1":
     version "1.1.1"

@@ -1,46 +1,54 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, TextInput, KeyboardAvoidingView, Button } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, TextInput } from 'react-native';
 import { saveDeckTitle } from '../utils/_decks';
-import { Header } from 'react-native-elements';
+import { Header, Input, Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
-import { addDeck } from '../redux/ActionCreators';
+import { addDeckTitle } from '../redux/ActionCreators';
 
-export default function AddDeck () {
+export default function AddDeck ({ navigation }) {
     const [title, changeTitle] = useState('');
     const dispatch = useDispatch();
 
     const submit = () => {
-        saveDeckTitle(title).then((a) => dispatch(addDeck(title)))
+        saveDeckTitle(title).then(res => dispatch(addDeckTitle(title)))
+        .then(navigation.navigate('DeckScreen',{
+            deck: {title: title, questions: []}
+        }))
         changeTitle('')
     }
     return(
-        <KeyboardAvoidingView style={styles.container}>
-
-            <ScrollView  contentContainerStyle={styles.container}>
+        <View style={{flex:1}}>
             
-        <Header
-            centerComponent={{ text: 'UdaciCards', style: { color: '#fff', fontSize: 30 } }}
-            />
-
-            <View style={styles.container}>
-                <Text style={styles.text}>What is the title of your new deck?</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={text => changeTitle(text)}
-                value={title}
-                />
+            <Header
+                containerStyle={{
+                    backgroundColor: '#212121',
+                    marginBottom: 0
+                }}
+                barStyle='default'
+                centerComponent={{ text: 'Add Deck', style: { color: '#fff', fontSize: 24 } }}
                 
-                <Button style={styles.btn}
-                title='Submit'
-                accessibilityLabel='Submit deck'
-                disabled={title === ''}
-                onPress={() => submit()}
                 />
-            </View>
-            </ScrollView>
+
+            <ScrollView  contentContainerStyle={styles.container}> 
             
-        </KeyboardAvoidingView>
-        
+
+                    <Text style={styles.text}>What is the title of your new deck?</Text>
+                    <Input
+                    style={styles.input}
+                    onChangeText={text => changeTitle(text)}
+                    value={title}
+                    inputStyle={{color: '#fff'}}
+                    />
+                    
+                    <Button buttonStyle={styles.btn}
+                    title='Add Deck'
+                    accessibilityLabel='Submit deck'
+                    disabled={title === ''}
+                    onPress={() => submit()}
+                    />
+            </ScrollView>
+        </View>  
+                
     )
 }
 
@@ -48,22 +56,24 @@ const styles = StyleSheet.create({
     container : {
         flex: 1,
         alignItems: "center",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        backgroundColor: '#303030'
     },
     text: {
         fontSize: 24,
         marginBottom: 30,
-        textAlign: "center"
+        textAlign: "center",
+        color: '#fff'
     },
     input: {
-        height: 40, 
-        width: 250,
         borderRadius: 7, 
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 30
     },
     btn: {
-        borderRadius: 50
+        backgroundColor: '#212121',
+        marginBottom: 30,
+        width: 120
     }
-}) 
+})

@@ -7,7 +7,7 @@ export default function DeckCard ({title, cards}) {
         <View style={styles.container}>
             <Text style={styles.header}>{title}</Text>
             {typeof cards === 'number' &&
-                <Text>{cards} cards</Text>
+                <Text style={styles.text}>{cards} cards</Text>
             }
         </View>
     )
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         height: 100,
-        backgroundColor: '#fff',
+        backgroundColor: '#424242',
         margin: 10,
         borderRadius: 7,
         justifyContent: 'center',
@@ -28,15 +28,19 @@ const styles = StyleSheet.create({
         shadowOffset: {
             width: 0,
             height: 3
-        },
-        height: 100
+        }
     },
     header: {
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#fff'
+    },
+    text: {
+        color: '#818181'
     },
     cards: {
         textAlign: 'center',
-        color: '#757575'
+        color: '#757575',
+        color: '#fff'
     }
 })
