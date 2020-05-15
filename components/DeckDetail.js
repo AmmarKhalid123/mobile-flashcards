@@ -6,6 +6,8 @@ import { removeDeckAsync } from '../utils/_decks';
 import { removeDeck } from '../redux/ActionCreators';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+//a view about the individual deck whose information is recieved as props
+
 export default function DeckDetail ({ route, navigation }) {
     const { deck } = route.params;
     const deckTitle = deck.title
@@ -37,7 +39,7 @@ export default function DeckDetail ({ route, navigation }) {
                 <Text style={styles.text}>
                     {deckTitle}
                 </Text>
-                <Text style={{color: '#818181'}}>{cards} cards</Text>
+                <Text style={{color: '#818181', marginBottom: 15}}>{deck.questions.length} cards</Text>
                 <Button
                 buttonStyle={styles.btn} 
                 title='Add Card'
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 24,
-        marginBottom: 30,
+        marginBottom: 10,
         marginTop: 30,
         color: '#fff'
     },

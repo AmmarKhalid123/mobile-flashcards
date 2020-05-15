@@ -15,7 +15,6 @@ export function saveDeckTitle (title) {
 
 export function removeDeckAsync (title) {
     return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
-        // console.log(JSON.parse(results))
         const data = JSON.parse(results)
         data[title] = undefined
         delete data[title]
@@ -33,7 +32,7 @@ export function addCardToDeckAsync (title, question, answer) {
 
 export function clearLocalNotification () {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
-      .then((res) => Notifications.cancelAllScheduledNotificationsAsync().then((res) => (null)))
+      .then(Notifications.cancelAllScheduledNotificationsAsync().then(() => {}))
   }
 
 function createNotification () {
@@ -60,21 +59,20 @@ function createNotification () {
           Permissions.askAsync(Permissions.NOTIFICATIONS)
             .then(({ status }) => {
               if (status === 'granted') {
-                Notifications.cancelAllScheduledNotificationsAsync().then((res) => (null))
+                Notifications.cancelAllScheduledNotificationsAsync()
   
                 let tomorrow = new Date()
-                tomorrow.setDate(tomorrow.getDate())
+                tomorrow.setDate(tomorrow.getDate()+1)
                 tomorrow.setHours(20)
-                tomorrow.setMintutes(0)
-  
-                Notifications.scheduleLocalNotificationsAsync(
+                tomorrow.setMinutes(0)
+                
+                Notifications.scheduleLocalNotificationAsync(
                   createNotification(),
                   {
                     time: tomorrow,
                     repeat: 'day',
                   }
-                ).then((res) => (null))
-  
+                )
                 AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
               }
             })

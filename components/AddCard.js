@@ -5,47 +5,52 @@ import { Button, Input } from 'react-native-elements';
 import { addCardToDeckAsync } from '../utils/_decks';
 import { addCardToDeck } from '../redux/ActionCreators';
 
+// a view for adding a card to a specific deck
+
 export default function AddCard ({ route, navigation }) {
     const [question, changeQue] = useState('')
-    const [answer, changeAns] = useState(null)
+    const [answer, changeAns] = useState('')
     const { deckTitle } = route.params
 
     const dispatch = useDispatch()
+    
     const submitCard = () => {
         //add to db
         addCardToDeckAsync(deckTitle, question, answer)
         //update redux store
         dispatch(addCardToDeck(deckTitle, question, answer))
         //navigate to 'DeckScreen'
-        navigation.navigate('DeckScreen')
+        navigation.navigate('Main', {screen: 'HomeScreen'})
         changeQue('');
         changeAns('');
 
     } 
+    
     return (
-        // <Saf style={styles.container}>
         <View style={{flex: 1, backgroundColor: '#303030'}}>
             <ScrollView contentContainerStyle={styles.container}>
+
                 <Input
                 placeholder='Add your Question'
                 onChangeText={value => changeQue(value)}
                 inputStyle={{color: '#fff'}}
                 />
+
                 <Input
                 placeholder='Enter your answer'
                 onChangeText={value => changeAns(value)}
                 inputStyle={{color: '#fff'}}
                 />
+
                 <Button
                 disabled={question === '' || answer === ''}
                 buttonStyle={styles.btn}
                 title='SUBMIT'
                 onPress={() => submitCard()}
                 />
+
             </ScrollView>
         </View>
-            
-        // </KeyboardAvoidingView>
     );
 }
 
@@ -56,7 +61,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#424242',
         margin: 10,
         borderRadius: 7,
-        // justifyContent: 'center',
         alignItems: "center",
         shadowRadius: 3,
         shadowOpacity: 0.8,

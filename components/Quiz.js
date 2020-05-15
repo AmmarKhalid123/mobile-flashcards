@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 import CardFlip from 'react-native-card-flip';
 import { clearLocalNotification, setLocalNotification } from '../utils/_decks';
 
+//a view for the quiz of a specific deck passed as params
 
 export default class Quiz extends Component {
     state = {
@@ -29,6 +30,8 @@ export default class Quiz extends Component {
         const { route, navigation } = this.props;
         const { questions, title } = route.params.deck;
         const { questionNum, correctAns, totalQues } = this.state;
+        
+        //if there are cards remaining
         if(questionNum < totalQues){
             return(
                 <View style={{flex: 1, backgroundColor: '#303030'}}>
@@ -46,7 +49,11 @@ export default class Quiz extends Component {
 
                             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
-                                <TouchableOpacity onPress={() => this.card.flip()} >
+                                <TouchableOpacity onPress={() => {
+                                    if(questionNum+1 < totalQues){
+                                        this.card.flip()
+                                    }
+                                }} >
                                     <Button
                                     buttonStyle={styles.btn}x
                                     title='Correct'
@@ -54,7 +61,11 @@ export default class Quiz extends Component {
                                     />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity onPress={() => this.card.flip()} >
+                                <TouchableOpacity onPress={() => {
+                                    if(questionNum+1 < totalQues){
+                                        this.card.flip()
+                                    }
+                                }} >
                                     <Button
                                     buttonStyle={styles.btn}
                                     title='Incorrect'
@@ -67,6 +78,8 @@ export default class Quiz extends Component {
                 </View>
             )
         }
+
+        //if there are no cards in the deck
         else if (totalQues === 0) {
             return(
                 <View style={{flex: 1, backgroundColor: '#303030'}}>
@@ -94,26 +107,30 @@ export default class Quiz extends Component {
                 </View>
             )
         }
+
+        //else all the remaining cards are quizzed
         else {
             return(
                 <View style={{flex: 1, backgroundColor: '#303030'}}>
                     <View style={styles.container}>
-                    <Text style={styles.text}>
-                    Your score: {correctAns}
-                    </Text>
+                    
+                        <Text style={styles.text}>
+                        Your score: {correctAns}
+                        </Text>
+                    
                         <Button
                         buttonStyle={styles.btn}
                         title='Restart Quiz'
                         onPress={() => {
-                           this.setState({
-                               correctAns: 0,
-                               questionNum: 0
-                           })
-                           clearLocalNotification()
-                           .then(setLocalNotification)
-                        }}
-                        
+                        this.setState({
+                            correctAns: 0,
+                            questionNum: 0
+                        })
+                        clearLocalNotification()
+                        .then(setLocalNotification)
+                        }}    
                         />
+                        
                         <Button
                         buttonStyle={styles.btn}                        
                         title='Back to Deck'
@@ -121,10 +138,11 @@ export default class Quiz extends Component {
                             navigation.navigate('DeckScreen', {
                             deck: route.params.deck
                             })
-                           clearLocalNotification()
-                           .then(setLocalNotification)
+                        clearLocalNotification()
+                        .then(setLocalNotification)
                         }}
                         />
+                    
                     </View>
                 </View>
             )

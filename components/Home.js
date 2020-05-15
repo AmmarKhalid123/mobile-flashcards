@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Main from './Main'
-import { NavigationContainer } from '@react-navigation/native'
 import Quiz from './Quiz';
 import DeckDetail from './DeckDetail';
 import AddCard from './AddCard';
 
 const Stack = createStackNavigator()
+
+//basically whole application
 
 export default function Home () {
     return (

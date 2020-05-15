@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-
+//Displaying the title and number of cards recieved as a prop
 export default function DeckCard ({title, cards}) {
     return(
         <View style={styles.container}>
@@ -37,10 +37,5 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#818181'
-    },
-    cards: {
-        textAlign: 'center',
-        color: '#757575',
-        color: '#fff'
     }
 })

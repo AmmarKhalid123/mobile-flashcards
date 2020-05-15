@@ -8,18 +8,21 @@ import { setDecks } from '../redux/ActionCreators';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+//Home Screen showing list of all the decks available
+
 export default function HomeScreen ({navigation}) {
+
     const dispatch = useDispatch()
+    
     useEffect(() => {
         getDecks().then(results => dispatch(setDecks(JSON.parse(results))))
     }, [getDecks])
 
     const decks = useSelector((state) => state)
-    console.log(decks)
+
     const renderCard = ({ item, index }) => {
         return(
             <TouchableOpacity
-                // style={{backgroundColor: '#121212'}}
                     key={item}
                     onPress={() => navigation.navigate('DeckScreen', {
                         deck: decks[item]
@@ -46,7 +49,6 @@ export default function HomeScreen ({navigation}) {
                 }}
                 barStyle='default'
                 centerComponent={{ text: 'Your UdaciCards', style: { color: '#fff', fontSize: 24 } }}
-                
                 />
                 <FlatList
                 keyExtractor={item => item}

@@ -6,6 +6,7 @@ import HomeScreen from './HomeScreen';
 
 const Tab = createBottomTabNavigator()
 
+
 export default function Main () {
     return(
             <Tab.Navigator
@@ -18,23 +19,29 @@ export default function Main () {
                   } else if (route.name === 'Add Deck') {
                     iconName = 'book';
                   }
-                  // You can return any component that you like here!
                   return <Entypo name={iconName} size={size} color={color} />;
                 }
               })
             }
             
             tabBarOptions={{
-              style: {backgroundColor: '#000', borderTopColor: '#212121'},
+              style: {
+                backgroundColor: '#000', 
+                borderTopColor: '#212121'
+              },
               activeTintColor: '#fff',
               inactiveTintColor: '#818181'
             }}
             >
                 <Tab.Screen
+                name='HomeScreen'
+                component={HomeScreen}
+                />    
                 
-                name='HomeScreen' component={HomeScreen} />    
-                <Tab.Screen name='Add Deck' component={AddDeck} />
+                <Tab.Screen 
+                name='Add Deck' 
+                component={AddDeck} 
+                />
             </Tab.Navigator>
-
     );
 }
