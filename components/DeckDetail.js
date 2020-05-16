@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { removeDeckAsync } from '../utils/_decks';
@@ -9,17 +9,20 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 //a view about the individual deck whose information is recieved as props
 
 export default function DeckDetail ({ route, navigation }) {
-    const { deck } = route.params;
-    const deckTitle = deck.title
+    const { deck} = route.params;
+    const deckTitle  = deck.title;
+    const recentDeck = useSelector(state => state[deckTitle]);
+    const cards = recentDeck ? recentDeck.questions.length : 0;
     const dispatch = useDispatch();
     
     const deleteDeck = () => {
         //delete from store
-        dispatch(removeDeck(deckTitle))
+        
         // //delete from db
-        removeDeckAsync(deckTitle)
+        removeDeckAsync(deckTitle).then(res => dispatch(removeDeck(deckTitle)))
+        .then(res => navigation.navigate('Main', {screen: 'HomeScreen'}))
         // //navigate to Main
-        navigation.navigate('Main')
+        
     }
 
     const addCard = () => {
@@ -30,7 +33,7 @@ export default function DeckDetail ({ route, navigation }) {
 
     const startQuiz = () => {
         navigation.navigate('QuizScreen', {
-            deck: deck
+            deck: recentDeck
         })
     }
     return(
@@ -39,7 +42,7 @@ export default function DeckDetail ({ route, navigation }) {
                 <Text style={styles.text}>
                     {deckTitle}
                 </Text>
-                <Text style={{color: '#818181', marginBottom: 15}}>{deck.questions.length} cards</Text>
+                <Text style={{color: '#818181', marginBottom: 15}}>{cards} cards</Text>
                 <Button
                 buttonStyle={styles.btn} 
                 title='Add Card'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { addCardToDeckAsync } from '../utils/_decks';
@@ -12,15 +12,20 @@ export default function AddCard ({ route, navigation }) {
     const [answer, changeAns] = useState('')
     const { deckTitle } = route.params
 
-    const dispatch = useDispatch()
+    const decks = useSelector(state => state);
+    const dispatch = useDispatch();
     
     const submitCard = () => {
         //add to db
         addCardToDeckAsync(deckTitle, question, answer)
+        .then((res) => dispatch(addCardToDeck(deckTitle, question, answer)))
+        .then((res) => navigation.navigate('DeckScreen', {
+            deck: decks[deckTitle]
+        }))
         //update redux store
-        dispatch(addCardToDeck(deckTitle, question, answer))
+        
         //navigate to 'DeckScreen'
-        navigation.navigate('Main', {screen: 'HomeScreen'})
+        
         changeQue('');
         changeAns('');
 

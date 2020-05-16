@@ -35,7 +35,7 @@ export default class Quiz extends Component {
         if(questionNum < totalQues){
             return(
                 <View style={{flex: 1, backgroundColor: '#303030'}}>
-                    <CardFlip style={styles.container} ref={(card) => this.card = card} >
+                    <CardFlip duration={500} style={styles.container} ref={(card) => this.card = card} >
                         <View>
                             <Text style={{color: '#fff', fontSize: 20}}>{questionNum+1}/{totalQues}</Text>
                             <Text style={styles.text}>{questions[questionNum].question}</Text>
@@ -55,9 +55,9 @@ export default class Quiz extends Component {
                                     }
                                 }} >
                                     <Button
-                                    buttonStyle={styles.btn}x
+                                    buttonStyle={styles.btn}
                                     title='Correct'
-                                    onPress={() => this.nextQues(true)}
+                                    onPress={() =>this.nextQues(true)}
                                     />
                                 </TouchableOpacity>
 
@@ -65,11 +65,12 @@ export default class Quiz extends Component {
                                     if(questionNum+1 < totalQues){
                                         this.card.flip()
                                     }
+
                                 }} >
                                     <Button
                                     buttonStyle={styles.btn}
                                     title='Incorrect'
-                                    onPress={() => this.nextQues(false)}
+                                    onPress={() =>this.nextQues(false)}
                                     />
                                 </TouchableOpacity>
                             </View>
