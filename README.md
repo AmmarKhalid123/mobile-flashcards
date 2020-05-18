@@ -2,9 +2,14 @@
 This is the final project of React Native, third and last course in the React Nanodegree Program by Udacity.
 
 ## Getting Started
+Download APK from here: https://expo.io/artifacts/c41678c2-8008-400e-bf1f-f1ba1eff7b17
+
+Or build one for yourself:
 Clone the repository on your machine, and type the commands on the terminal in the project root directory.
-- npm install
-- npm start
+- expo install
+- expo start
+
+Pre-requisites: should have expo-cli installed.
 
 # Mobile Flashcards
 Mobile Flashcards is an application to remember and test your memory skills regarding any topic. This is how it works:
