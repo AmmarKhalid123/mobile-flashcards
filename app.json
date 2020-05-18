@@ -2,17 +2,16 @@
   "expo": {
     "name": "FlashCards",
     "slug": "mobile-flashcards",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
     "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "ios": {
-      "supportsTablet": true
+    "sdkVersion": "37.0.0",
+    "description": "Save information and test yourself",
+    "android": {
+      "package": "com.firstapp.flashcards",
+      "versionCode": 1
     },
-    "description": "Save information and test yourself"
+    "packagerOpts": {
+      "nonPersistent": false
+    }
   }
 }
